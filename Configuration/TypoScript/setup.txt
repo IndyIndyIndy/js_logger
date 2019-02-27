@@ -1,6 +1,3 @@
 
 page.includeJS.jslogger = EXT:js_logger/Resources/Public/JavaScript/JsLogger.js
 page.includeJS.jslogger.forceOnTop = 1
-
-//@todo remove
-page.includeJS.test = EXT:js_logger/Resources/Public/JavaScript/Test.js
