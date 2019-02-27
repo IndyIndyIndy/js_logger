@@ -1,0 +1,35 @@
+{
+    "name": "christianessl/js_logger",
+    "type": "typo3-cms-extension",
+    "description": "JSLogger for TYPO3. Log errors and exceptions users are encountering in the frontend to the TYPO3 backend.",
+    "keywords": [
+        "TYPO3",
+        "extension"
+    ],
+    "license": ["GPL-2.0-or-later"],
+    "homepage": "https://christianessl.at",
+    "authors": [
+        {
+            "name": "Christian Essl",
+            "role": "Developer"
+        }
+    ],
+    "version": "0.1.0",
+    "require": {
+        "typo3/cms-core": "^8.7.0|| ^9.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ChristianEssl\\JsLogger\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ChristianEssl\\JsLogger\\Tests\\": "Tests"
+        }
+    },
+    "replace": {
+        "js_logger": "self.version",
+        "typo3-ter/js_logger": "self.version"
+    }
+}
