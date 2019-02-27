@@ -9,6 +9,9 @@
             self.initOnError();
         };
 
+        /**
+         * Initialize the console.devlog function for debugging
+         */
         self.initDevlog = function () {
             console['devlog'] = function (message, file, lineNumber, colNumber) {
                 var postData = self.preparePostData({
@@ -24,6 +27,9 @@
             };
         };
 
+        /**
+         * Tell window.onerror to log js errors to the backend
+         */
         self.initOnError = function () {
             window.onerror = function (message, file, lineNumber, colNumber) {
                 console.devlog(message, file, lineNumber, colNumber);
@@ -31,6 +37,11 @@
             };
         };
 
+        /**
+         * Send the error log to the eID ajax request handler
+         *
+         * @param data
+         */
         self.sendLogToBackend = function (data) {
             var request = new XMLHttpRequest();
             request.open('POST', self.url);
@@ -38,6 +49,12 @@
             request.send(data);
         };
 
+        /**
+         * If no filename was given, automatically get the caller functions fileName
+         *
+         * @param file
+         * @returns {*}
+         */
         self.getFileName = function(file) {
             var caller = self.getCaller();
             if (typeof file === 'undefined' && typeof caller === 'object') {
@@ -46,6 +63,12 @@
             return file;
         };
 
+        /**
+         * If no lineNumber was given, automatically get the caller functions lineNumber
+         *
+         * @param lineNumber
+         * @returns {*}
+         */
         self.getLineNumber = function(lineNumber) {
             var caller = self.getCaller();
             if (typeof lineNumber === 'undefined' && typeof caller === 'object') {
@@ -54,6 +77,12 @@
             return lineNumber;
         };
 
+        /**
+         * If no colNumber was given, automatically get the caller functions colNumber
+         *
+         * @param colNumber
+         * @returns {*}
+         */
         self.getColumnNumber = function(colNumber) {
             var caller = self.getCaller();
             if (typeof colNumber === 'undefined' && typeof caller === 'object') {
@@ -62,6 +91,12 @@
             return colNumber;
         };
 
+        /**
+         * Prepare the post data for the ajax request
+         *
+         * @param parameters
+         * @returns {string}
+         */
         self.preparePostData = function (parameters) {
             var sendData = '';
             for (var name in parameters) {
@@ -75,6 +110,11 @@
             return sendData;
         };
 
+        /**
+         * Get the calling function (that called console.devlog)
+         *
+         * @returns {*}
+         */
         self.getCaller = function () {
             try {
                 var error = new Error();

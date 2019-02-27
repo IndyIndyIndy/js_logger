@@ -27,6 +27,8 @@ class JsLogger implements \Psr\Log\LoggerAwareInterface
     use LoggerAwareTrait;
 
     /**
+     * Log the data from the ajax request to the PSR Logger
+     *
      * @param ServerRequestInterface $request
      *
      * @return ResponseInterface
@@ -55,6 +57,8 @@ class JsLogger implements \Psr\Log\LoggerAwareInterface
     }
 
     /**
+     * Parse the request parameters
+     *
      * @param ServerRequestInterface $request
      * @param string $name
      *
