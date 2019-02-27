@@ -15,13 +15,17 @@ namespace ChristianEssl\JsLogger\Log;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Http\Response;
 
 /**
  * JsLogger
  */
-class JsLogger
+class JsLogger implements \Psr\Log\LoggerAwareInterface
 {
+
+    use LoggerAwareTrait;
+
     /**
      * @param ServerRequestInterface $request
      *
@@ -37,13 +41,15 @@ class JsLogger
         $userAgent = $this->getRequestParameter($request, 'userAgent');
         $user = $this->getRequestParameter($request, 'user');
 
-        var_dump($message);
-        var_dump($file);
-        var_dump($lineNumber);
-        var_dump($colNumber);
-        var_dump($url);
-        var_dump($userAgent);
-        var_dump($user);
+        $this->logger->error($message, [
+            'message' => $message,
+            'file' => $file,
+            'lineNumber' => $lineNumber,
+            'colNumber' => $colNumber,
+            'url' => $url,
+            'userAgent' => $userAgent,
+            'user' => $user,
+        ]);
 
         return new Response('');
     }
@@ -58,7 +64,7 @@ class JsLogger
     {
         $body = $request->getParsedBody();
         if (isset($body[$name]) && $body[$name] !== 'undefined') {
-            return $body[$name];
+            return htmlspecialchars($body[$name]);
         }
         return null;
     }

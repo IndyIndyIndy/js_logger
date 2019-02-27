@@ -10,7 +10,6 @@
         };
 
         self.initDevlog = function () {
-            //@todo automatically get file, linenumber, colnumber
             console['devlog'] = function (message, file, lineNumber, colNumber) {
                 var postData = self.preparePostData({
                     'message': message,
