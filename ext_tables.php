@@ -4,8 +4,9 @@ defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(
     function ($extKey) {
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['jslogger'] =
-            \ChristianEssl\JsLogger\Log\JsLogger::class . '::log';
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+            $extKey, 'Configuration/TypoScript', 'JS Logger'
+        );
     },
     $_EXTKEY
 );

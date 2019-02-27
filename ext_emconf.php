@@ -5,7 +5,7 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Boilerplate Extension',
+    'title' => 'JS Logger',
     'description' => 'JSLogger for TYPO3. Log errors and exceptions users are encountering in the frontend to the TYPO3 backend.',
     'category' => 'misc',
     'author' => 'Christian Eßl',
