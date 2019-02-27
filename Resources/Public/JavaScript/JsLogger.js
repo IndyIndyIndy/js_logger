@@ -21,7 +21,6 @@
                     'colNumber': self.getColumnNumber(colNumber),
                     'url': document.location.href,
                     'userAgent': navigator.userAgent,
-                    'user': '@todo'
                 });
                 self.sendLogToBackend(postData);
             };

@@ -41,7 +41,6 @@ class JsLogger implements \Psr\Log\LoggerAwareInterface
         $colNumber = $this->getRequestParameter($request, 'colNumber');
         $url = $this->getRequestParameter($request, 'url');
         $userAgent = $this->getRequestParameter($request, 'userAgent');
-        $user = $this->getRequestParameter($request, 'user');
 
         $this->logger->error($message, [
             'message' => $message,
@@ -50,7 +49,6 @@ class JsLogger implements \Psr\Log\LoggerAwareInterface
             'colNumber' => $colNumber,
             'url' => $url,
             'userAgent' => $userAgent,
-            'user' => $user,
         ]);
 
         return new Response('');
