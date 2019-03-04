@@ -13,12 +13,10 @@
          * Initialize the console.devlog function for debugging
          */
         self.initDevlog = function () {
-            console['devlog'] = function (message, file, lineNumber, colNumber) {
+            console['devlog'] = function (message, stacktrace) {
                 var postData = self.preparePostData({
                     'message': message,
-                    'file': self.getFileName(file),
-                    'lineNumber': self.getLineNumber(lineNumber),
-                    'colNumber': self.getColumnNumber(colNumber),
+                    'stacktrace': stacktrace,
                     'url': document.location.href,
                     'userAgent': navigator.userAgent,
                 });
@@ -30,8 +28,15 @@
          * Tell window.onerror to log js errors to the backend
          */
         self.initOnError = function () {
-            window.onerror = function (message, file, lineNumber, colNumber) {
-                console.devlog(message, file, lineNumber, colNumber);
+            window.onerror = function (message, file, lineNumber, colNumber, errorObject) {
+                StackTrace.fromError(errorObject).then(function(stackframes) {
+                    var stringifiedStack = stackframes.map(function(sf) {
+                        return sf.toString();
+                    }).join('\n');
+                    console.devlog(message, stringifiedStack);
+                }).catch(function (error) {
+                    console.log(error.message);
+                });
                 return false;
             };
         };
@@ -46,48 +51,6 @@
             request.open('POST', self.url);
             request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             request.send(data);
-        };
-
-        /**
-         * If no filename was given, automatically get the caller functions fileName
-         *
-         * @param file
-         * @returns {*}
-         */
-        self.getFileName = function(file) {
-            var caller = self.getCaller();
-            if (typeof file === 'undefined' && typeof caller === 'object') {
-                file = caller.getFileName();
-            }
-            return file;
-        };
-
-        /**
-         * If no lineNumber was given, automatically get the caller functions lineNumber
-         *
-         * @param lineNumber
-         * @returns {*}
-         */
-        self.getLineNumber = function(lineNumber) {
-            var caller = self.getCaller();
-            if (typeof lineNumber === 'undefined' && typeof caller === 'object') {
-                lineNumber = caller.getLineNumber();
-            }
-            return lineNumber;
-        };
-
-        /**
-         * If no colNumber was given, automatically get the caller functions colNumber
-         *
-         * @param colNumber
-         * @returns {*}
-         */
-        self.getColumnNumber = function(colNumber) {
-            var caller = self.getCaller();
-            if (typeof colNumber === 'undefined' && typeof caller === 'object') {
-                colNumber = caller.getColumnNumber();
-            }
-            return colNumber;
         };
 
         /**

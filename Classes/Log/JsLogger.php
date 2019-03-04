@@ -36,17 +36,13 @@ class JsLogger implements \Psr\Log\LoggerAwareInterface
     public function log(ServerRequestInterface $request): ResponseInterface
     {
         $message = $this->getRequestParameter($request, 'message');
-        $file = $this->getRequestParameter($request, 'file');
-        $lineNumber = $this->getRequestParameter($request, 'lineNumber');
-        $colNumber = $this->getRequestParameter($request, 'colNumber');
+        $stacktrace = $this->getRequestParameter($request, 'stacktrace');
         $url = $this->getRequestParameter($request, 'url');
         $userAgent = $this->getRequestParameter($request, 'userAgent');
 
         $this->logger->error($message, [
             'message' => $message,
-            'file' => $file,
-            'lineNumber' => $lineNumber,
-            'colNumber' => $colNumber,
+            'stacktrace' => $stacktrace,
             'url' => $url,
             'userAgent' => $userAgent,
         ]);

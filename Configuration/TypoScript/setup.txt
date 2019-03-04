@@ -1,3 +1,4 @@
 
 page.includeJS.jslogger = EXT:js_logger/Resources/Public/JavaScript/JsLogger.js
 page.includeJS.jslogger.forceOnTop = 1
+page.includeJS.stacktrace = EXT:js_logger/Resources/Public/JavaScript/Contrib/stacktrace.min.js
