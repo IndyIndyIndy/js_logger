@@ -14,13 +14,22 @@
          */
         self.initDevlog = function () {
             console['devlog'] = function (message, stacktrace) {
-                var postData = self.preparePostData({
-                    'message': message,
-                    'stacktrace': stacktrace,
-                    'url': document.location.href,
-                    'userAgent': navigator.userAgent,
-                });
-                self.sendLogToBackend(postData);
+                if (typeof stacktrace === 'undefined') {
+                    StackTrace.get().then(function(stackframes) {
+                        var stringifiedStack = stackframes.map(function(sf) {
+                            return sf.toString();
+                        }).join('\n');
+                        console.devlog(message, stringifiedStack);
+                    }).catch(self.onStacktraceCatch);
+                } else {
+                    var postData = self.preparePostData({
+                        'message': message,
+                        'stacktrace': stacktrace,
+                        'url': document.location.href,
+                        'userAgent': navigator.userAgent,
+                    });
+                    self.sendLogToBackend(postData);
+                }
             };
         };
 
@@ -34,11 +43,18 @@
                         return sf.toString();
                     }).join('\n');
                     console.devlog(message, stringifiedStack);
-                }).catch(function (error) {
-                    console.log(error.message);
-                });
+                }).catch(self.onStacktraceCatch);
                 return false;
             };
+        };
+
+        /**
+         * Called on errors inside stacktrace.jss
+         *
+         * @param error
+         */
+        self.onStacktraceCatch = function(error) {
+            console.log(error.message);
         };
 
         /**
