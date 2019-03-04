@@ -14,13 +14,17 @@ configured in your TYPO3 instance. (like FileWriter or SysLogWriter)
 
 Logged info:
 - Error message
-- File name
-- Line Number
-- Column Number
+- Stack trace (file name, function, line number, column number, ...)
 - Url
 - User Agent
 
-@todo: handle source maps (for minified js)
+This extension uses [stacktrace.js](https://github.com/stacktracejs/stacktrace.js) for creating readable stacktraces and
+parsing source maps. This means, that if you use minified js in production and have source maps configured, your logged 
+error stacktrace will automatically show the correct line and column numbers from the unminified file, briefly worded: 
+**readable error output**.  
+
+You can find out more about source maps and how to use them in your javascript here:
+[How_to u se_a_source_map](https://developer.mozilla.org/de/docs/Tools/Debugger/How_to/Use_a_source_map)
 
 ## Requirements
 
