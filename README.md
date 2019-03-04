@@ -1,6 +1,11 @@
 # TYPO3 Extension "js_logger"
 JSLogger for TYPO3. Log errors and exceptions users are encountering in the frontend to the TYPO3 backend.
 
+[![Latest Stable Version](https://poser.pugx.org/christianessl/js_logger/v/stable)](https://packagist.org/packages/christianessl/js_logger)
+[![Total Downloads](https://poser.pugx.org/christianessl/js_logger/downloads)](https://packagist.org/packages/christianessl/js_logger)
+[![Latest Unstable Version](https://poser.pugx.org/christianessl/js_logger/v/unstable)](https://packagist.org/packages/christianessl/js_logger)
+[![License](https://poser.pugx.org/christianessl/js_logger/license)](https://packagist.org/packages/christianessl/js_logger)
+
 ## What does it do?
 
 This extension simply logs any javascript errors encountered in your frontend via ajax to the TYPO3 backend. 
