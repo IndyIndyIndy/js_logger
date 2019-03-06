@@ -1,0 +1,5 @@
+## Exclude external libraries from automatic code review
+exclude_patterns:
+- "Resources/Public/JavaScript/Contrib/stacktrace.js"
+- "Resources/Public/JavaScript/Contrib/stacktrace.min.js"
+- "Resources/Public/JavaScript/Contrib/stacktrace.min.map"
