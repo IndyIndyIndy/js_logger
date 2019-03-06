@@ -16,10 +16,7 @@
             console['devlog'] = function (message, stacktrace) {
                 if (typeof stacktrace === 'undefined') {
                     StackTrace.get().then(function(stackframes) {
-                        var stringifiedStack = stackframes.map(function(sf) {
-                            return sf.toString();
-                        }).join('\n');
-                        console.devlog(message, stringifiedStack);
+                        console.devlog(message, self.stringifyStack(stackframes));
                     }).catch(self.onStacktraceCatch);
                 } else {
                     var postData = self.preparePostData({
@@ -34,15 +31,24 @@
         };
 
         /**
+         * Join stack into a human readable string
+         *
+         * @param {string} stackframes
+         * @returns {string}
+         */
+        self.stringifyStack = function (stackframes) {
+            return stackframes.map(function(sf) {
+                return sf.toString();
+            }).join('\n');
+        };
+
+        /**
          * Tell window.onerror to log js errors to the backend
          */
         self.initOnError = function () {
             window.onerror = function (message, file, lineNumber, colNumber, errorObject) {
                 StackTrace.fromError(errorObject).then(function(stackframes) {
-                    var stringifiedStack = stackframes.map(function(sf) {
-                        return sf.toString();
-                    }).join('\n');
-                    console.devlog(message, stringifiedStack);
+                    console.devlog(message, self.stringifyStack(stackframes));
                 }).catch(self.onStacktraceCatch);
                 return false;
             };
