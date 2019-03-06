@@ -1,6 +1,7 @@
 # TYPO3 Extension "js_logger"
 JSLogger for TYPO3. Log errors and exceptions users are encountering in the frontend to the TYPO3 backend.
 
+[![Code Climate](https://codeclimate.com/github/IndyIndyIndy/js_logger.svg)](https://codeclimate.com/github/IndyIndyIndy/js_logger)
 [![Latest Stable Version](https://poser.pugx.org/christianessl/js_logger/v/stable)](https://packagist.org/packages/christianessl/js_logger)
 [![Total Downloads](https://poser.pugx.org/christianessl/js_logger/downloads)](https://packagist.org/packages/christianessl/js_logger)
 [![Latest Unstable Version](https://poser.pugx.org/christianessl/js_logger/v/unstable)](https://packagist.org/packages/christianessl/js_logger)
